@@ -1,10 +1,10 @@
 import React from 'react';
 import {Container} from "./style"
 
-function Menu(props) {
+function Menu({userName}) {
     return (
         <Container>
-            Menu
+            {userName}
         </Container>
     );
 }

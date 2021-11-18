@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container } from './style';
 
-function Header() {
+function Header({userName}) {
     return (
         <Container>
-           asdf 
+           {userName} 
         </Container>
     );
 }
