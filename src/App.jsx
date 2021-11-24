@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ThemeContext from "./contexts/ThemeContext.js";
-import UserContext from "./contexts/UserContext.js";
 import { Container, Conteudo } from "./App.style.js";
 import { Body, Header, Menu } from "./components";
+import SetTheme from "./components/SetTheme/index.jsx";
+import { StateProvider } from "./contexts/StateContext.js";
 
 const userDefault = {
   name: "Gilson",
@@ -11,38 +11,24 @@ const userDefault = {
 
 function App() {
   const [user, setUser] = useState(userDefault);
-  const [tema, setTema] = useState("light");
+  const [theme, setTheme] = useState("light");
 
-  const handleTheme = () => {
-    if (tema === "light") {
-      setTema("dark");
-    } else {
-      setTema("light");
-    }
+  const providerValue = {
+    theme: theme,
+    user: user,
   };
 
   return (
-    <ThemeContext.Provider value={tema}>
-      <UserContext.Provider value={user}>
-        <Container>
-          <ThemeContext.Consumer>
-            {(value) => (
-              <>
-                Tema:{" "}
-                <button onClick={handleTheme}>
-                  {value === "light" ? "Escuro" : "Claro"}
-                </button>
-              </>
-            )}
-          </ThemeContext.Consumer>
-          <Header />
-          <Conteudo>
-            <Menu />
-            <Body setUserName={setUser} />
-          </Conteudo>
-        </Container>
-      </UserContext.Provider>
-    </ThemeContext.Provider>
+    <StateProvider value={providerValue}>
+      <Container>
+        <SetTheme setTheme={setTheme} />
+        <Header />
+        <Conteudo>
+          <Menu />
+          <Body setUserName={setUser} />
+        </Conteudo>
+      </Container>
+    </StateProvider>
   );
 }
 

@@ -1,19 +1,17 @@
 import { useState, useContext } from "react";
-import ThemeContext from "../../contexts/ThemeContext";
-import UserContext from "../../contexts/UserContext";
+import { StateContext } from "../../contexts/StateContext";
 import { Container } from "./style";
 
 function Body({ setUserName }) {
   const [inputName, setInputName] = useState("");
-  const theme = useContext(ThemeContext);
-  const user = useContext(UserContext);
+  const { theme, user } = useContext(StateContext);
 
   const handleInputName = (e) => {
     setInputName(e.target.value);
   };
 
   const handleKeyEnter = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && inputName !== "") {
       setUserName({ name: inputName });
       setInputName("");
     }
