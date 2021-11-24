@@ -38,7 +38,7 @@ function App() {
           <Header />
           <Conteudo>
             <Menu />
-            <Body userName={user.name} setUserName={setUser} />
+            <Body setUserName={setUser} />
           </Conteudo>
         </Container>
       </UserContext.Provider>
