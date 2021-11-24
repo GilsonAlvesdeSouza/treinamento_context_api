@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ThemeContext from "../../contexts/ThemeContext";
 import { Container } from "./style";
 
 function Body({ userName, setUserName }) {
@@ -23,16 +24,20 @@ function Body({ userName, setUserName }) {
   };
 
   return (
-    <Container>
-      <p>{userName}</p>
-      <input
-        type="text"
-        value={inputName}
-        onChange={(e) => handleInputName(e)}
-        onKeyUp={(e) => handleKeyEnter(e)}
-      />
-      <button onClick={handleClickUserName}>Mudar nome de Usuário</button>
-    </Container>
+    <ThemeContext.Consumer>
+      {(value) => (
+        <Container className={`theme-${value}`}>
+          <p>{userName}</p>
+          <input
+            type="text"
+            value={inputName}
+            onChange={(e) => handleInputName(e)}
+            onKeyUp={(e) => handleKeyEnter(e)}
+          />
+          <button onClick={handleClickUserName}>Mudar nome de Usuário</button>
+        </Container>
+      )}
+    </ThemeContext.Consumer>
   );
 }
 
