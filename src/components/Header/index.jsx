@@ -1,12 +1,19 @@
 import React from "react";
 import ThemeContext from "../../contexts/ThemeContext";
+import UserContext from "../../contexts/UserContext";
 import { Container } from "./style";
 
-function Header({ userName }) {
+function Header() {
   return (
     <ThemeContext.Consumer>
       {(value) => (
-        <Container className={`theme-${value}`}>{userName}</Container>
+        <UserContext.Consumer>
+          {(user) => (
+            <Container className={`theme-${value}`}>
+              {user.name} - {value}
+            </Container>
+          )}
+        </UserContext.Consumer>
       )}
     </ThemeContext.Consumer>
   );

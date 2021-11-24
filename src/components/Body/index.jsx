@@ -11,14 +11,14 @@ function Body({ userName, setUserName }) {
 
   const handleKeyEnter = (e) => {
     if (e.key === "Enter") {
-      setUserName(inputName);
+      setUserName({name: inputName});
       setInputName("");
     }
   };
 
   const handleClickUserName = () => {
     if (inputName !== "") {
-      setUserName(inputName);
+      setUserName({name: inputName});
       setInputName("");
     }
   };
@@ -30,6 +30,7 @@ function Body({ userName, setUserName }) {
           <p>{userName}</p>
           <input
             type="text"
+            placeholder="informe um nome"
             value={inputName}
             onChange={(e) => handleInputName(e)}
             onKeyUp={(e) => handleKeyEnter(e)}
