@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Container, Conteudo } from "./App.style.js";
-import { Body, Header, Menu } from "./components";
-import SetTheme from "./components/SetTheme/index.jsx";
+import { Body, Header, Menu, SetTheme } from "./components";
 import { StateProvider } from "./contexts/StateContext.js";
 
 const userDefault = {
@@ -10,22 +8,22 @@ const userDefault = {
 };
 
 function App() {
-  const [user, setUser] = useState(userDefault);
-  const [theme, setTheme] = useState("light");
+  // const [user, setUser] = useState(userDefault);
+  // const [theme, setTheme] = useState("light");
 
-  const providerValue = {
-    theme: theme,
-    user: user,
-  };
+  // const providerValue = {
+  //   theme: theme,
+  //   user: user,
+  // };
 
   return (
-    <StateProvider value={providerValue}>
+    <StateProvider>
       <Container>
-        <SetTheme setTheme={setTheme} />
+        <SetTheme />
         <Header />
         <Conteudo>
           <Menu />
-          <Body setUserName={setUser} />
+          <Body />
         </Conteudo>
       </Container>
     </StateProvider>

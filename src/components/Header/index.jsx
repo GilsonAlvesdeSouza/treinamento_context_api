@@ -1,13 +1,12 @@
-import { useContext } from "react";
-import { StateContext } from "../../contexts/StateContext";
+import { useStateValue } from "../../contexts/StateContext";
 import { Container } from "./style";
 
 function Header() {
-  const { theme, user } = useContext(StateContext);
+  const [state, dipatch] = useStateValue();
 
   return (
-    <Container className={`theme-${theme}`}>
-      {user.name} - {theme}
+    <Container className={`theme-${state.theme}`}>
+      {state.user.name} - {state.theme}
     </Container>
   );
 }

@@ -1,11 +1,11 @@
-import { useState, useContext } from "react";
-import { StateContext } from "../../contexts/StateContext";
+import { useState } from "react";
+import { useStateValue } from "../../contexts/StateContext";
 import Count from "../Count";
 import { Container } from "./style";
 
-function Body({ setUserName }) {
+function Body() {
   const [inputName, setInputName] = useState("");
-  const { theme, user } = useContext(StateContext);
+  const [state, dispatch] = useStateValue();
 
   const handleInputName = (e) => {
     setInputName(e.target.value);
@@ -13,21 +13,27 @@ function Body({ setUserName }) {
 
   const handleKeyEnter = (e) => {
     if (e.key === "Enter" && inputName !== "") {
-      setUserName({ name: inputName });
+      dispatch({
+        type: "setName",
+        userName: inputName
+      });
       setInputName("");
     }
   };
 
   const handleClickUserName = () => {
     if (inputName !== "") {
-      setUserName({ name: inputName });
+      dispatch({
+        type: "setName",
+        userName: inputName
+      });
       setInputName("");
     }
   };
 
   return (
-    <Container className={`theme-${theme}`}>
-      <p>{user.name}</p>
+    <Container className={`theme-${state.theme}`}>
+      <p>{state.user.name}</p>
       <input
         type="text"
         placeholder="informe um nome"

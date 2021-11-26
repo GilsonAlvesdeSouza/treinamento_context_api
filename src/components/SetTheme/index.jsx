@@ -1,14 +1,19 @@
-import { useContext } from "react";
-import { StateContext } from "../../contexts/StateContext";
+import { useStateValue } from "../../contexts/StateContext";
 
-function SetTheme({ setTheme }) {
-  const { theme } = useContext(StateContext);
+function SetTheme() {
+  const [state, dispatch] = useStateValue();
 
   const handleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
+    if (state.theme === "light") {
+      dispatch({
+        type: "setTheme",
+        theme: "dark",
+      });
     } else {
-      setTheme("light");
+      dispatch({
+        type: "setTheme",
+        theme: "light",
+      });
     }
   };
 
@@ -16,7 +21,7 @@ function SetTheme({ setTheme }) {
     <div>
       Tema:
       <button onClick={handleTheme}>
-        {theme === "light" ? "Escuro" : "Claro"}
+        {state.theme === "light" ? "Escuro" : "Claro"}
       </button>
     </div>
   );

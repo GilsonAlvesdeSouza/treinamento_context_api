@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import { StateContext } from "../../contexts/StateContext";
+import { useStateValue } from "../../contexts/StateContext";
 
 import { Container } from "./style";
 
 function Menu({ userName }) {
-  const { theme, user } = useContext(StateContext);
+  const [state, dispatch] = useStateValue();
 
-  return <Container className={`theme-${theme}`}>{user.name}</Container>;
+  return <Container className={`theme-${state.theme}`}>{state.user.name}</Container>;
 }
 export default Menu;
