@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { StateContext } from "../../contexts/StateContext";
+import Count from "../Count";
 import { Container } from "./style";
 
 function Body({ setUserName }) {
@@ -35,6 +36,9 @@ function Body({ setUserName }) {
         onKeyUp={(e) => handleKeyEnter(e)}
       />
       <button onClick={handleClickUserName}>Mudar nome de Usuário</button>
+      <hr />
+
+      <Count />
     </Container>
   );
 }
