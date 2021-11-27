@@ -1,35 +1,21 @@
 import { createContext, useContext, useReducer } from "react";
+import { ThemeReducer, UserReducer } from "../reducers";
 
 const initialState = {
-  theme: "light",
-  user: {
-    name: "Visitante",
-    email: "visitante@gmail.com",
-  },
+  theme: ThemeReducer(),
+  user: UserReducer(),
 };
 
-const reducer = (state, action) => {
-  let user = { ...state.user };
-  switch (action.type) {
-    case "setTheme":
-      return { ...state, theme: action.theme };
-
-    case "setName":
-      user.name = action.userName;
-      return { ...state, user };
-
-    case "setEmail":
-      user.email = action.userEmail;
-      return { ...state, user };
-    default:
-  }
-};
+const MainReducer = (state, action) => ({
+  theme: ThemeReducer(state.theme, action),
+  user: UserReducer(state.user, action),
+});
 
 export const StateContext = createContext();
 
 export const StateProvider = ({ children }) => {
   return (
-    <StateContext.Provider value={useReducer(reducer, initialState)}>
+    <StateContext.Provider value={useReducer(MainReducer, initialState)}>
       {children}
     </StateContext.Provider>
   );
