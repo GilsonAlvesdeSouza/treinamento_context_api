@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { ThemeReducer, UserReducer } from "../reducers";
 
 const initialState = {
@@ -13,9 +13,17 @@ const MainReducer = (state, action) => ({
 
 export const StateContext = createContext();
 
+const localState = JSON.parse(localStorage.getItem("ctx"));
+
 export const StateProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(MainReducer, localState || initialState);
+
+  useEffect(() => {
+    localStorage.setItem("ctx", JSON.stringify(state));
+  }, [state]);
+
   return (
-    <StateContext.Provider value={useReducer(MainReducer, initialState)}>
+    <StateContext.Provider value={[state, dispatch]}>
       {children}
     </StateContext.Provider>
   );
